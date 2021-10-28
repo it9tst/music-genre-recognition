@@ -1,0 +1,1 @@
+genre name split: [['Hip-Hop', 'Instrumental', 'Pop', 'Folk'], ['Experimental', 'Rock', 'Electronic', 'International']]
