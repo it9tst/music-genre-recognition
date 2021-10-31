@@ -1,1 +1,1 @@
-genre name split: [['International'], ['Experimental']]
+genre name split: [['Experimental'], ['International']]

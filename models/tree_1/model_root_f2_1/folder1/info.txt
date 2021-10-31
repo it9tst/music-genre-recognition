@@ -1,1 +1,1 @@
-genre name split: [['Electronic'], ['Hip-Hop']]
+genre name split: [['Hip-Hop'], ['Electronic']]
