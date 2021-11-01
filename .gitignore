@@ -1,10 +1,11 @@
 .ipynb_checkpoints/
 __pycache__/
 _wip/
-data/
 
 *.mp3
 *.npz
-*.pickle
+*.csv
+*.wav
+*.png
 
 local.properties
