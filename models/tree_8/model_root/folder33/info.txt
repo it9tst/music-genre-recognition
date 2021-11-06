@@ -1,0 +1,1 @@
+genre name split: [['Classical', 'Disco', 'Hip-Hop', 'Metal', 'Pop'], ['Blues', 'Country', 'Jazz', 'Reggae', 'Rock']]
