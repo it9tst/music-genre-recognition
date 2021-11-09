@@ -1,3 +1,3 @@
 # music-genre-recognition
 
-Link dataset: https://github.com/mdeff/fma
+Link GTZAN Dataset: https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification
