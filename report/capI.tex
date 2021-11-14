@@ -1,51 +1,35 @@
-La chitarra ha una lunga tradizione che affonda le sue radici addirittura al tempo degli arabi. I primi esemplari risalgono al tredicesimo secolo. Inizialmente dotata di quattro corde, si è accresciuta nel Rinascimento di un'altra corda, arrivando poi nel periodo Barocco all'attuale numero di sei.\\
-\newline
-La chitarra è composta da due parti principali:
+Un genere musicale è una categoria convenzionale che identifica e classifica i brani e le composizioni in base a criteri di affinità. Le musiche possono essere raggruppate in base alle loro convenzioni formali e stilistiche, alla tradizione in cui si inseriscono, allo spirito dei loro temi, alla loro destinazione o, se presente, al loro testo. L'indeterminatezza di alcuni di questi parametri rende spesso la divisione della musica in generi controversa e arbitraria. Un genere musicale può a sua volta dividersi in sottogeneri che ne ampliano la complessità. Fortunatamente, su Internet si possono trovare tanti \textit{dataset} adatti al progetto che si vuole svolgere. 
+
+\section{Set dati FMA}
+In un primo momento si è deciso di utilizzare il set dati \textit{FMA (Free Music Archive)} un set di dati open source e facilmente accessibile, adatto per valutare diverse attività di \textit{MIR (Music Information Retrieval)}. Esso contiene 8000 brani di 30 secondi l'uno divisi equamente in 8 generi:
 \begin{itemize}
-	\item il \textbf{manico}, su cui si trova la tastiera e che termina con la paletta la quale ospita le meccaniche per l'accordatura;
-	\item la \textbf{cassa di risonanza} o tavola armonica con una cavità centrale, che serve ad amplificare il suono prodotto dalle corde.
+	\item Electronic
+	\item Experimental
+	\item Folk
+	\item Hip-Hop
+	\item Instrumental
+	\item International
+	\item Pop
+	\item Rock
 \end{itemize}
+Inoltre viene dato in dotazione anche un file \textit{.csv} contenente tutti i metadata dei brani come ID, titolo, artista, genere, tags, etc.\\
+Questo \textit{dataset} è stato utilizzato per i modelli basati su alberi decisionali, che si trovano nella cartella \textit{models}, che vanno dal numero 1 al numero 6.\\
+Nota a margine, invece di 8000 brani se ne sono potuti utilizzare solo 7994 perchè sei file erano corrotti.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.50]{./images/img14.jpg}
-\end{figure}
-
-\subsection{Corde}
-Le corde delle chitarre moderne sono sei e sono ordinate dall'alto verso il basso nel seguente modo:
+\section{Set dati GTZAN}
+Successivamente si è utilizzato il set dati \textit{GTZAN} (detto anche il \textit{MNIST of sounds}) che, a differenza del primo, contiene 1000 brani di 30 secondi l'uno divisi in 100 file audio per ogni genere. Quindi questa volta abbiamo a disposizione 10 generi:
 \begin{itemize}
-	\item la prima corda corrisponde alla nota \textit{Mi cantino} (e);
-	\item la seconda corrisponde alla nota \textit{Si} (B);
-	\item la terza corrisponde alla nota \textit{Sol} (G);
-	\item la quarta corrisponde alla nota \textit{Re} (D);
-	\item la quinta corrisponde alla nota \textit{La} (A);
-	\item la sesta corrisponde alla nota \textit{Mi basso} (E).
+	\item Blues
+	\item Classical
+	\item Country
+	\item Disco
+	\item Hip-Hop
+	\item Jazz
+	\item Metal
+	\item Pop
+	\item Reggae
+	\item Rock
 \end{itemize}
-L'ultima corda dell'elenco è quella più spessa, mentre la prima è la più sottile.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.35]{./images/img12.jpg}
-\end{figure}
-
-\subsection{Tasti}
-Sul manico della chitarra c’è la tastiera. Si chiama tastiera proprio perchè ci sono i tasti. Quest'ultimi sono delimitati da delle barrette di metallo e ognuno di essi corrisponde a una nota. Dunque, se abbiamo una chitarra a diciannove tasti, possiamo fare diciannove note diverse per ogni corda.\\
-La distanza tra due tasti della stessa corda prende il nome di \textbf{semitono}. Ad esempio, se premiamo la sesta corda in corrispondenza del \textit{La}, poi premendo la corda al tasto adiacente più vicino alla cassa di risonanza (un semitono più alto) ascolteremo un \textit{La\#}. Se non premiamo nessun tasto la corda si dice che è suonata a vuoto. Le sei corde suonate a vuoto devono emettere dei suoni ben precisi. Dunque, la chitarra deve essere accordata. L'accordatura classica delle sei corde, ovvero la nota che devono suonare le corde a vuoto (dal basso all'alto), è la seguente: \textit{Mi}, \textit{La}, \textit{Re}, \textit{Sol}, \textit{Si}, \textit{Mi}. \\ Conoscendo il suono prodotto dalle sei corde suonate a vuoto e sapendo che ogni nota suonata ad un tasto dista di un semitono dalla nota suonata al tasto adiacente possiamo mappare tutta la tastiera della chitarra.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.60]{./images/img13.jpg}
-\end{figure}
-
-\subsection{Tab}
-La \textit{tab} è una rappresentazione delle corde della chitarra. Una tablatura è solitamente scritta usando sei linee orizzontali, ognuna corrispondente a una corda.\\
-Al contrario dei normali spartiti, su una tablatura non ci sono le note da suonare ma si trovano le indicazioni su dove mettere le dita.\\I numeri sulle linee corrispondono ai tasti della tastiera. Ad esempio, un "1" sulla prima corda, indica di suonare il \textit{Mi cantino}, tenendo premuto il primo tasto.\\
-Se il numero è maggiore o uguale a uno, bisogna premere il tasto corrispondente quando si suonerà quella corda. Se troviamo uno \textbf{zero} allora si suona la corda a vuoto, senza premere alcun tasto.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.55]{./images/img15.png}
-\end{figure}
-\noindent Spesso leggendo una tablatura si trovano dei numeri che sono allineati verticalmente. In questo caso si premono più tasti contemporaneamente. Le \textit{tab} vanno lette come libri cioè da sinistra a destra.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.55]{./images/img16.png}
-\end{figure}
+Il set di dati \textit{GTZAN} è il set di dati open source più utilizzato con il machine learning per il riconoscimento del genere musicale. I file sono stati raccolti tra il 2000 e il 2001 da una varietà di fonti tra cui CD personali, radio e registrazioni microfoniche, al fine di rappresentare una varietà di condizioni di registrazione.\\
+Questo \textit{dataset} è stato utilizzato per i modelli basati su alberi decisionali, che si trovano nella cartella \textit{models}, che vanno dal numero 7 al numero 11.\\
+Nota a margine, invece di 1000 brani se ne sono potuti utilizzare solo 999 perchè un file era corrotto.

@@ -7,5 +7,6 @@ _wip/
 *.csv
 *.wav
 *.png
+*.docx
 
 local.properties

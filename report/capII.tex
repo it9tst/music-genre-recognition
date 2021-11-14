@@ -1,29 +1,130 @@
-Le note musicali si possono classificare nel seguente modo:
+I problemi che verranno segnalati nel seguente capitolo non si sono presentati subito ma solo quando si è testata l'accuratezza del modello. Dunque, ci sono paragrafi in cui si parla di esso senza averlo ancora definito.
+\section{Librerie utilizzate}
+I \textit{package} usati per realizzare il progetto sono:
+\begin{itemize}
+	\item \textit{JupyterLab, versione 3.1.7} è un’interfaccia utente basata sul Web. Offre un ambiente di sviluppo interattivo per lavorare con i notebook Jupyter, il codice e i dati.
+	\item \textit{numpy, versione 1.19.5}, è una libreria che aggiunge supporto a grandi matrici e \textit{array} multidimensionali insieme a una vasta collezione di funzioni matematiche di alto livello per poter operare efficientemente su queste strutture dati;
+	\item \textit{librosa, versione 0.8.1}, è una libreria per la musica e l'analisi audio. Fornisce gli elementi necessari per recuperare informazioni musicali;
+	\item \textit{matplotlib, versione 3.4.3}, è una libreria per la creazione di grafici;
+	\item \textit{scipy, versione 1.7.1}, è una libreria di algoritmi e strumenti matematici che contiene moduli per l'ottimizzazione, per l'algebra lineare, elaborazione di segnali ed immagini e altro;
+	\item \textit{seaborn, versione 0.11.2}, è una libreria che permette la creazione di grafici, molto diffuso tra data scientist e data analys;
+	\item \textit{tensorflow, versione 2.5.0}, è una libreria utilizzata per il \textit{machine learning} che fornisce moduli sperimentati e ottimizzati, utili nella realizzazione di algoritmi per diversi tipi di compiti percettivi e di comprensione del linguaggio;
+	\item \textit{tensorboard, versione 2.5.0}, che consente di verificare visivamente e interpretare le esecuzioni e i grafici di TensorFlow.
+\end{itemize}
+
+\section{Preparazione del dataset}
+Ciò che segue è servito per preparare ed elaborare sia il primo set di dati \textit{(FMA)} che il secondo \textit{(GTZAN)}. Per evitare ripetizioni, descrivendo i dati nel dettaglio, mi riferirò solo al secondo e definitivo \textit{dataset} utilizzato. Il Jupyter notebook dove si trova tutto il codice eseguito, per questa fase, è il file \textit{"1 - Load dataset.ipynb"}.\\
+\newline
+Per prima cosa è stato creato un dizionario con tutti i generi del dataset. Successivamente per ogni file audio si è ricavato il corrispettivo spettrogramma grazie alla libreria \textit{librosa}, con cui si può analizzare e manipolare il suono.\\ Per sopperire alla poca quantità di brani disponibili per genere e per evitare  di dare al modello troppe informazioni in una volta, si è deciso di dividere ogni brano di 30 secondi (1280x128) in dieci file di 3 secondi l'uno (128x128), così da avere non più 100, ma 1000 file per genere per un totale complessivo di 7990 file (un brano era corrotto, quindi, splittato, 10 file, non è stato inserito).\\
+\newline Questo è un esempio di spettrogramma di un file audio di 30 secondi.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.17]{./images/img4.jpg}
+	\includegraphics[scale=0.60]{./images/img01.png}
 \end{figure}
-\noindent La lettera a sinistra identifica la nota musicale mentre il numero a destra rappresenta la sua frequenza.\\
-In musica, un'\textbf{ottava} è l'intervallo di otto note posizionate a frequenza diversa nella scala musicale. Le frequenze intermedie sono altre sei note. La frequenza tra una nota di un'ottava e la stessa nota di un'ottava successiva è doppia. Per esempio, il \textit{La} centrale (A4) ha frequenza di 440 Hz, il \textit{La} (A5) posto un'ottava sopra ha frequenza 880 Hz, quello un'ottava sotto (A3) ha frequenza 220 Hz.\\
-Se si rappresentassero le prime sei ottave della nota \textit{Do} (C) potremmo vedere che la sua frequenza raddoppia ad ogni ottava.\\
-\newline
-I tasti che intercorrono fra gli estremi della stessa ottava (esempio \textit{Do} (C4) - \textit{Do} (C5)) sono dodici semitoni per cui la frequenza deve raddoppiare ogni dodici semitoni. Si può rappresentare quanto detto dalla seguente formula:
+\noindent Invece questo è un esempio di spettrogramma di un file audio di 3 secondi.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.60]{./images/img02.png}
+\end{figure}
+\noindent Il codice che esegue quanto è stato appena descritto è il seguente:
 \vspace*{2ex}
-\begin{center}
-	\begin{math}
-		F_{k}=440Hz \cdot 2^{k \over 12}
-	\end{math}
-\end{center}
+\pythonexternal{./codes/preElaborazionedati1.py}
+\vspace*{2ex}
+\noindent Una volta ottenuti gli \textit{array} degli spettrogrammi e dei corrispettivi generi, si passa alla fase in cui mescoliamo i dati, in modo da avere più imprevedibilità, e di suddivisione nel seguente modo:
+\begin{itemize}
+	\item 10\% dei dati li usiamo per la \textit{validation}
+	\item 10\% dei dati li usiamo per i \textit{test}
+	\item 80\% dei dati li usiamo per il \textit{traning}
+\end{itemize}
+Il \textit{traning set} lo utilizziamo per costruire il modello, il \textit{validation set} per validare i parametri dei \textit{layer} della rete neurale mentre il \textit{test set} per determinare l'accuratezza.\\
+\newline Il codice che esegue quanto è stato appena descritto è il seguente:
+\vspace*{2ex}
+\pythonexternal{./codes/preElaborazionedati2.py}
+\vspace*{2ex}
+\noindent Eseguiamo una conversione da spettrogrammi in scala dB in spettrogrammi di potenza.
+\vspace*{2ex}
+\pythonexternal{./codes/preElaborazionedati3.py}
+\vspace*{2ex}
+\noindent Usiamo una codifica \textit{one-hot} per i labels in modo da avere una mappatura di numeri "categorica", cioè si può trovare un solo "1" in ogni riga; e successivamente salviamo i dati in archivi compressi \textit{npz} per organizzare meglio il \textit{dataset} da dare come \textit{input} al modello.
+\vspace*{2ex}
+\pythonexternal{./codes/preElaborazionedati4.py}
+\vspace*{2ex}
 
-Nel campo della musica viene utilizzata la trasformata a Q costante, a discapito della più nota trasformata di Fourier, proprio per la sua natura esponenziale. Inoltre, l'accuratezza della trasformata a Q costante è analoga alla scala logaritmica e imita l'orecchio umano, avendo una risoluzione di frequenza più alta a quelle più basse e una risoluzione più bassa alle frequenze più alte. Infatti, dal seguente grafico si può notare la natura esponenziale della funzione:
+\section{Modello della rete}
+La difficoltà nell’apprendere i meccanismi di implementazione su \textit{Keras} sono ridotti al minimo grazie alla vasta documentazione presente, arricchita da numerosi esempi sulle più utilizzate configurazioni inerenti il \textit{machine learning}, come le \textit{CNN} (Convolutional Neural Network).
+Le operazioni di calcolo matriciali possono essere accelerate sia tramite \textit{CPU}, che \textit{GPU} (su \textit{hardware} \textit{Nvidia} con supporto \textit{CUDA}). In questo caso è stata utilizzata una \textit{GPU} in modo da sfruttare direttamente la sua potenza parallela contenute nelle schede video recenti.
 \vspace*{2ex}
-\begin{center}
-	\begin{tikzpicture}
-	\begin{axis}[ 
-		xlabel=$k$,
-		ylabel={$frequenza$}
-		] 
-		\addplot {440*2^x/12}; 
-	\end{axis}
-\end{tikzpicture}
-\end{center}
+\pythonexternal{./codes/gpu.py}
+\vspace*{2ex}
+
+\subsection{Uso di Keras}
+Il Jupyter notebook dove si trova tutto il codice eseguito, per questa fase, sono i file riguardanti il modello che cominciano con il numero \textit{"2"} e \textit{"3"}.\\
+Dopo aver caricato il \textit{traning set} e il \textit{validation set} possiamo definire il modello con l'aggiunta dei seguenti \textit{layers}:
+\begin{itemize}
+	\item \textbf{Conv2D}: mette in evidenza le caratteristiche interessanti dell'immagine. Parametri di \textit{input}: numero di filtri, grandezza filtri, \textit{input shape} e funzione di attivazione;
+	\item \textbf{MaxPooling2D}: riduce la dimensione dell'immagine, elimina le informazioni inutili mantenendo quelle più importanti;
+	\item \textbf{Flattern}: appiattisce il tensore e rimuove tutte le dimensioni;
+	\item \textbf{Dense}: crea un \textit{layer} di neuroni, ognuno dei quali connesso ad ogni uscita del \textit{layer} precedente e determina la dimensione di uscita;
+	\item \textbf{Activation}: la funzione di attivazione è una "porta" matematica tra l'\textit{input} che alimenta il neurone corrente e il suo \textit{output} che va allo strato successivo.
+\end{itemize}
+L'unità lineare rettificata (\textit{ReLU}) è la funzione di attivazione più comunemente utilizzata nel \textit{deep learning}. La funzione restituisce 0 se l'\textit{input} è negativo, ma per qualsiasi \textit{input} positivo, restituisce quel valore.\\
+La funzione \textit{softmax} è molto utilizzata in statistica e consente di gestire un vettore di uscita normalizzato di n elementi, dove ogni elemento può valere da 0 ad 1 e la somma di tutti gli elementi è pari ad 1. In sostanza il nostro vettore di uscita sarà in una forma simile a quella \textit{one-hot} e ogni posizione corrisponderà alla probabilità (normalizzata) che l’immagine appartenga a quella specifica classe. La somma di tutte le probabilità sarà 1 = 100\%.\\
+Per compilare il modello è stato scelto come ottimizzatore l'algoritmo \textit{ADAM} in quanto è genericamente raccomandato perchè riesce a "smussare" i passaggi di discesa del gradiente in modo che il percorso da seguire sia meno rumoroso e la convergenza più veloce.\\
+\newline Il codice che definisce il modello è il seguente:
+\vspace*{2ex}
+\pythonexternal{./codes/modelloFinale1.py}
+\vspace*{2ex}
+\noindent Prima di avviare l'addestramento del modello, definiamo alcune funzioni \textit{callback} che possono essere eseguite in momenti specifici del ciclo di training, ad esempio alla fine di ogni epoca:
+\begin{itemize}
+	\item \textbf{TensorBoard}: per usare Tensorboard;
+	\item \textbf{Checkpoint}: consente di salvare il modello, con i suoi pesi, al verificarsi di specificate condizioni;
+	\item \textbf{Reduce Learning Rate on Plateau}: consente di attuare una strategia flessibile di training, riducendo il learning rate se le prestazioni del modello non migliorano (plateau).
+\end{itemize}
+Per avviare l'addestramento del modello eseguiamo la funzione \textit{model.fit()} dove indichiamo con \textit{batch\_size} il numero di campioni per ogni aggiornamento del gradiente e con \textit{epochs} il numero di iterazioni sul quale il modello deve effettuare il \textit{training}. In questo modo partirà la fase di addestramento che andrà ad affinare sempre di più le performance del modello.\\
+\newline Il codice è il seguente:
+\vspace*{2ex}
+\pythonexternal{./codes/modelloFinale2.py}
+\vspace*{2ex}
+\noindent La funzione \textit{summary()} ci descrive il modello:
+\vspace*{2ex}
+\pythonexternal{./codes/modelloFinale3.py}
+\vspace*{2ex}
+
+\subsection{Addestramento e valutazione del modello}
+Durante il progetto sono stati effettuati diversi addestramenti che si trovano tutti nella cartella \textit{models} con i corrispettivi log che si trovano nella cartella \textit{logs}.\\
+\newline
+\textbf{Problemi riscontrati:} i primi test effettuati con il \textit{dataset FMA} hanno riportato risultati abbastanza deludenti con valori di accuratezza sul \textit{test set} intorno al 40\%.\\
+\newline
+\textbf{Soluzioni provate:} una prima soluzione è stata quella di utilizzare un albero decisionale binario in modo da suddividere i dati in "isole" separate ricorsivamente e scegliendo, per ogni nodo, tra le possibili combinazioni, quella con il valore di accuratezza sul \textit{validation set} maggiore. Sono stati testati 6 alberi che variano per settaggi del modello e tipologia (alberi bilanciati o sbilanciati - alberi numero 2 e numero 3). Purtroppo non ci sono stati miglioramenti rispetto al modello singolo senza albero, con i valori di accuratezza sul \textit{test set} che si sono aggirati intorno al 35\% - 40\%.\\
+\newline Di seguito uno dei tanti report e \textit{confusion matrix} ottenuti.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./images/test01.png}
+	\includegraphics[scale=0.7]{./images/test02.png}
+\end{figure}
+
+\noindent \textbf{Soluzione finale:} dopo svariati tentativi, il cambiamento di \textit{dataset} da \textit{FMA} a \textit{GTZAN} è stata la soluzione più ottimale trovata. Infatti usando il secondo, con il modello senza albero, si sono visti risultati molto soddisfacenti con valori di accuratezza sul \textit{test set} intorno al 79\%. Anche questa volta, per migliorare ulteriormente l'accuratezza, è tornato in gioco l'utilizzo dell'albero decisionale dove con alberi bilanciati (test albero numeri 7, 8 e 9) il risultato è stato pressocchè uguale a quello senza albero, mentre utilizzando alberi sbilanciati (test albero numeri 10 e 11) si è finalmente giunti ad un miglioramento, seppur non di molto, con i valori di accuratezza sul \textit{test set} che hanno superato l'83\%.\\
+\newline Di seguito il report e la \textit{confusion matrix} dell'albero numero 11, il definitivo.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./images/test03.png}
+	\includegraphics[scale=0.7]{./images/test04.png}
+\end{figure}
+
+\subsection{K-Fold Cross Validation}
+Per la creazione dell'albero decisionale e quindi per la scelta del miglior modello per ogni nodo, si è adottata la tecnica del \textit{Cross Validation} (o validazione incrociata) che è una tecnica statistica, spesso chiamata anche k-fold cross validation perché il dataset iniziale viene diviso in una serie di porzioni uguali di dati (k-campi) dove vengono usati iterativamente un tot per il \textit{train set} e un tot per il \textit{validation set}.\\
+\newline In questo modo si è in grado di limitare i danni nel caso di dati sporchi nel \textit{training set}. Il risultato finale sarà poi una media delle performances delle varie iterazioni.\\ Non c’è da preoccuparsi se le performances cambieranno da iterazione a interazione, è proprio quello il senso di usare ogni volta dati differenti per addestrare e valutare il modello.\\
+\newline Nella \textit{Cross Validation} si vede bene come per ogni iterazione si utilizzano porzioni diverse per il \textit{train set} (parte blu) e per il \textit{validation set} (parte gialla).
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./images/cross-val.png}
+\end{figure}
+\noindent Ed ecco l'albero sbilanciato ottenuto, con specificato il numero di modello migliore scelto, per ogni nodo:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{./images/tree.png}
+\end{figure}
+\noindent Il codice che esegue quanto è stato appena descritto è il seguente:
+\vspace*{2ex}
+\pythonexternal{./codes/preparazioneAlbero.py}
+\vspace*{2ex}

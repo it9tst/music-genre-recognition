@@ -1,21 +1,29 @@
-self.input_shape = (192, 9, 1)
-self.num_classes = 21
-self.num_strings = 6
-
-def build_model(self):
-    model = Sequential()
-    model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=self.input_shape))
-    model.add(Conv2D(64, (3, 3), activation='relu'))
-    model.add(Conv2D(64, (3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.25))   
-    model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(self.num_classes * self.num_strings))
-    model.add(Reshape((self.num_strings, self.num_classes)))
-    model.add(Activation(self.softmax_by_string))
-
-    model.compile(loss=self.catcross_by_string, optimizer=Adadelta(), metrics=[self.avg_acc])
-
-    self.model = model
+Model: "model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 128, 128, 1)]     0         
+_________________________________________________________________
+conv_1 (Conv2D)              (None, 126, 126, 32)      320       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 63, 63, 32)        0         
+_________________________________________________________________
+conv_2 (Conv2D)              (None, 61, 61, 64)        18496     
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 30, 30, 64)        0         
+_________________________________________________________________
+conv_3 (Conv2D)              (None, 28, 28, 128)       73856     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 14, 14, 128)       0         
+_________________________________________________________________
+conv_4 (Conv2D)              (None, 12, 12, 512)       590336    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 6, 6, 512)         0         
+_________________________________________________________________
+flatten (Flatten)            (None, 18432)             0         
+_________________________________________________________________
+preds (Dense)                (None, 10)                184330    
+=================================================================
+Total params: 867,338
+Trainable params: 867,338
+Non-trainable params: 0
