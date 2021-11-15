@@ -15,7 +15,7 @@ I \textit{package} usati per realizzare il progetto sono:
 \section{Preparazione del dataset}
 Ciò che segue è servito per preparare ed elaborare sia il primo set di dati \textit{(FMA)} che il secondo \textit{(GTZAN)}. Per evitare ripetizioni, descrivendo i dati nel dettaglio, mi riferirò solo al secondo e definitivo \textit{dataset} utilizzato. Il Jupyter notebook dove si trova tutto il codice eseguito, per questa fase, è il file \textit{"1 - Load dataset.ipynb"}.\\
 \newline
-Per prima cosa è stato creato un dizionario con tutti i generi del dataset. Successivamente per ogni file audio si è ricavato il corrispettivo spettrogramma grazie alla libreria \textit{librosa}, con cui si può analizzare e manipolare il suono.\\ Per sopperire alla poca quantità di brani disponibili per genere e per evitare  di dare al modello troppe informazioni in una volta, si è deciso di dividere ogni brano di 30 secondi (1280x128) in dieci file di 3 secondi l'uno (128x128), così da avere non più 100, ma 1000 file per genere per un totale complessivo di 7990 file (un brano era corrotto, quindi, splittato, 10 file, non è stato inserito).\\
+Per prima cosa è stato creato un dizionario con tutti i generi del dataset. Successivamente per ogni file audio si è ricavato il corrispettivo spettrogramma grazie alla libreria \textit{librosa}, con cui si può analizzare e manipolare il suono.\\ Per sopperire alla poca quantità di brani disponibili per genere e per evitare  di dare al modello troppe informazioni in una volta, si è deciso di dividere ogni brano di 30 secondi (1280x128) in dieci file di 3 secondi l'uno (128x128), così da avere non più 100, ma 1000 file per genere per un totale complessivo di 7990 file (un brano era corrotto (splittato in 10 file) e quindi non è stato inserito).\\
 \newline Questo è un esempio di spettrogramma di un file audio di 30 secondi.
 \begin{figure}[H]
 	\centering
@@ -45,7 +45,7 @@ Il \textit{traning set} lo utilizziamo per costruire il modello, il \textit{vali
 \vspace*{2ex}
 \pythonexternal{./codes/preElaborazionedati3.py}
 \vspace*{2ex}
-\noindent Usiamo una codifica \textit{one-hot} per i labels in modo da avere una mappatura di numeri "categorica", cioè si può trovare un solo "1" in ogni riga; e successivamente salviamo i dati in archivi compressi \textit{npz} per organizzare meglio il \textit{dataset} da dare come \textit{input} al modello.
+\noindent Usiamo una codifica \textit{one-hot} per i labels in modo da avere una mappatura di numeri "categorica", cioè si può trovare un solo "1" in ogni riga; e successivamente salviamo i dati in archivi compressi \textit{.npz} per organizzare meglio il \textit{dataset} da dare come \textit{input} al modello.
 \vspace*{2ex}
 \pythonexternal{./codes/preElaborazionedati4.py}
 \vspace*{2ex}

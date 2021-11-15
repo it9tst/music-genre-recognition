@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.15)  14 NOV 2021 03:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.15)  15 NOV 2021 19:30
 entering extended mode
 **./relazione.tex
 (relazione.tex
@@ -1415,11 +1415,11 @@ Package rerunfilecheck Info: File `relazione.out' has not changed.
 (rerunfilecheck)             Checksum: 31E29316E7C99D5D8F4DE20619081558;3305.
  ) 
 Here is how much of TeX's memory you used:
- 36180 strings out of 479334
- 796917 string characters out of 2855659
- 1690717 words of memory out of 3000000
+ 36184 strings out of 479334
+ 796951 string characters out of 2855659
+ 1690718 words of memory out of 3000000
  52396 multiletter control sequences out of 15000+200000
- 423609 words of font info for 181 fonts, out of 3000000 for 9000
+ 423767 words of font info for 183 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,8n,103p,857b,2117s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Gabriele\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\t
@@ -1437,7 +1437,7 @@ fonts/cm/cmsy8.pfb><C:/Users/Gabriele/AppData/Local/Programs/MiKTeX/fonts/type1
 /fonts/type1/public/amsfonts/latxfont/lcircle1.pfb><C:/Users/Gabriele/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/txfonts/t1xbtt.pfb><C:/Users/Gabriele/A
 ppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on relazione.pdf (33 pages, 939551 bytes).
+Output written on relazione.pdf (33 pages, 949961 bytes).
 PDF statistics:
  730 PDF objects out of 1000 (max. 8388607)
  387 named destinations out of 1000 (max. 500000)
