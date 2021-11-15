@@ -17,7 +17,7 @@ Linux, Windows and MacOS environments should both work.
 
 ### Use
 
-1. Download GTZAN Dataset from: https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification and copy it in ``data/``](data/) directory
+1. Download GTZAN Dataset from: https://www.kaggle.com/andradaolteanu/gtzan-dataset-music-genre-classification and copy it in [``data/``](data/) directory
 2. Run ``Load dataset.ipynb`` to prepare and generate the dataset
 3. Run ``Model root_0.ipynb`` to generate the models of first node
 4. Run ``Model root_1.ipynb`` to generate the models of second node
