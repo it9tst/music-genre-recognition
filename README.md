@@ -35,7 +35,7 @@ Linux, Windows and MacOS environments should both work.
 
 There is an android application and you can find the code in [``Music_Genre_Recognition/``](app/Music_Genre_Recognition/) directory.
 
-### Authors
+### Author
 [Gabriele Tornatore](https://github.com/it9tst)
 
 ### License
