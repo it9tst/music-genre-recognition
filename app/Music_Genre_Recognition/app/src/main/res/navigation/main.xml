@@ -40,6 +40,6 @@
     <fragment
         android:id="@+id/nav_tab"
         android:name="com.unibo.music_genre_recognition.layout.TabViewFragment"
-        android:label="Guitar Tab"
+        android:label="Risultato predizione"
         tools:layout="@layout/fragment_tab_view" />
 </navigation>

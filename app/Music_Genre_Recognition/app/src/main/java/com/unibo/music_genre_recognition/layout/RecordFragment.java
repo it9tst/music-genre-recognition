@@ -132,7 +132,7 @@ public class RecordFragment extends Fragment implements View.OnClickListener{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ITALIAN);
         Date now = new Date();
 
-        recordFile = "Tab_" + formatter.format(now) + ".aac";
+        recordFile = "Genre_" + formatter.format(now) + ".aac";
 
         timerAscolto.schedule(new TimerTask() {
             int count = 0;
