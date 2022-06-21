@@ -2,6 +2,9 @@
 
 ### Final Project for exam of Project Work on Sistemi Digitali M - Ing. Informatica Magistrale - UniBO 2021
 
+### Documentation
+[``Final Report``](https://github.com/it9tst/music-genre-recognition/blob/main/report/relazione.pdf)
+
 ### Requirements
 
 Python 3.7.11, plus some external libraries, are required to use this project:
